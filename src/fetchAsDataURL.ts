@@ -8,7 +8,7 @@
 
 interface FetchResolve {
   url: string;
-  result?: FileReader["result"];
+  result?: FileReader['result'];
 }
 
 function fetchAsDataURL(url: string) {
@@ -27,8 +27,8 @@ function fetchAsDataURL(url: string) {
     xhr.onerror = () => {
       reject(Error(`fetch ${url} error`));
     };
-    xhr.responseType = "blob";
-    xhr.open("GET", url);
+    xhr.responseType = 'blob';
+    xhr.open('GET', url);
     xhr.send();
   });
 }
