@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "webpack && node ./dist/bundle.js",
-    "commitmsg": "validate-commit-msg"
+    "commitmsg": "validate-commit-msg",
+    "release-f": "standard-version -f",
+    "release-major": "standard-version -r major",
+    "release-minor": "standard-version -r minor",
+    "release-patch": "standard-version -r patch"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,7 @@
   "devDependencies": {
     "cz-conventional-changelog": "^3.0.2",
     "husky": "^3.1.0",
+    "standard-version": "^7.0.1",
     "ts-loader": "^6.1.2",
     "typescript": "^3.7.3",
     "validate-commit-msg": "^2.14.0",
