@@ -1,0 +1,32 @@
+{
+  "name": "canvas-sprite-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "webpack && node ./dist/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sexyHuang/canvas-sprite-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sexyHuang/canvas-sprite-ts/issues"
+  },
+  "homepage": "https://github.com/sexyHuang/canvas-sprite-ts#readme",
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.0.2",
+    "ts-loader": "^6.1.2",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
