@@ -2,7 +2,7 @@
  * @Author: Sexy
  * @Date: 2019-12-18 11:42:55
  * @LastEditors  : Sexy
- * @LastEditTime : 2019-12-25 16:27:19
+ * @LastEditTime : 2019-12-25 17:34:16
  * @Description: file content
  */
 
@@ -11,11 +11,11 @@ import tryFromCache from './tryFromCache';
 import hackSwapProcesses from './hackSwapProcesses';
 interface CanvasSpriteConfig {
   canvas: HTMLCanvasElement;
-  fps: number;
+  fps?: number;
   frames: number;
   imageUrl: string;
-  loop: number | boolean;
-  autoPlay: boolean;
+  loop?: number | boolean;
+  autoPlay?: boolean;
 }
 
 const CANVAS_CS_ID_KEY = 'data-cs-id';

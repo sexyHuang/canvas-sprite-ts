@@ -2,7 +2,12 @@
   "name": "canvas-sprite-ts",
   "version": "1.2.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "webpack",
     "test": "webpack-dev-server --config webpack.test.config.js",
@@ -16,7 +21,12 @@
     "type": "git",
     "url": "git+https://github.com/sexyHuang/canvas-sprite-ts.git"
   },
-  "keywords": [],
+  "keywords": [
+    "sprite",
+    "spritesheet",
+    "canvas",
+    "animation"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
