@@ -2,19 +2,20 @@
  * @Author: Sexy
  * @Date: 2019-12-18 11:42:55
  * @LastEditors  : Sexy
- * @LastEditTime : 2019-12-18 17:24:07
+ * @LastEditTime : 2019-12-25 16:27:19
  * @Description: file content
  */
 
 import isCrossOrigin from './isCrossOrigin';
 import tryFromCache from './tryFromCache';
-
+import hackSwapProcesses from './hackSwapProcesses';
 interface CanvasSpriteConfig {
   canvas: HTMLCanvasElement;
   fps: number;
   frames: number;
   imageUrl: string;
-  loop: number;
+  loop: number | boolean;
+  autoPlay: boolean;
 }
 
 const CANVAS_CS_ID_KEY = 'data-cs-id';
@@ -28,6 +29,7 @@ const loadImage = (url: string) =>
       resolve(img);
     };
     img.onerror = () => {
+      console.error(url);
       reject(Error(`load ${url} error`));
     };
     img.src = src;
@@ -41,9 +43,13 @@ export default class CanvasSprite {
   private spriteImgPromise!: Promise<HTMLImageElement>;
   private activeFrameIndex: number = 0;
   private reqId: number = 0;
-  private loop: number = -1;
-  private loopCount: number = 0;
+  private loop: number = 0;
+  private loopCount: number = 1;
   private aniStop: boolean = true;
+  private stopHack: Function = () => {};
+  onEnd: Function = () => {};
+  onLoad: Function = () => {};
+  onLoop: Function = () => {};
   constructor(config: CanvasSpriteConfig) {
     this.init(config);
   }
@@ -52,7 +58,8 @@ export default class CanvasSprite {
     frames,
     imageUrl,
     fps = 24,
-    loop = -1
+    loop = false,
+    autoPlay = false
   }: CanvasSpriteConfig) {
     if (canvas.hasAttribute(CANVAS_CS_ID_KEY)) {
       throw new Error('the canvas has sprite with it, call .destroy() first');
@@ -62,30 +69,34 @@ export default class CanvasSprite {
     this.context = canvas.getContext('2d') as CanvasRenderingContext2D;
     this.frames = frames;
     this.fps = fps;
-    this.loop = loop;
+    this.loop = loop === true ? -1 : loop || 0;
 
     const imgPromise = loadImage(imageUrl);
     this.spriteImgPromise = imgPromise;
-
+    autoPlay && this.play();
     imgPromise.then(spriteImg => {
       const cWidth = spriteImg.width / frames;
       const cHeight = spriteImg.height;
       canvas.width = cWidth;
       canvas.height = cHeight;
+      this.draw();
+      this.onLoad();
     });
   }
   private addActiveFrameIndex() {
     const { loop, loopCount, frames, activeFrameIndex, reqId } = this;
     if (activeFrameIndex < frames) this.activeFrameIndex += 1;
-    else if (loop === -1 || loop >= loopCount) {
-      cancelAnimationFrame(reqId);
+    else if (loop !== -1 && loop <= loopCount) {
+      this.stop();
+      this.onEnd();
     } else {
+      this.onLoop(this.loopCount);
       this.loopCount += 1;
-      this.activeFrameIndex += 1;
+      this.activeFrameIndex = 0;
     }
   }
   private async spriteAnimate(then: number = Date.now()) {
-    if (this.aniStop) return;
+    if (this.aniStop) return this.stopHack();
     const now = Date.now();
     const delta = now - then;
     const fpsInterval = 1000 / this.fps;
@@ -116,8 +127,10 @@ export default class CanvasSprite {
   }
 
   play() {
+    if (!this.aniStop) return;
     this.aniStop = false;
     this.spriteAnimate();
+    this.stopHack = hackSwapProcesses();
   }
   pause() {
     this.aniStop = true;
@@ -135,9 +148,12 @@ export default class CanvasSprite {
     this.context.clearRect(0, 0, width, height);
     this.canvas.removeAttribute(CANVAS_CS_ID_KEY);
     this.reqId = 0;
+    this.loopCount = 1;
   }
   reset(config: CanvasSpriteConfig) {
     this.destroy();
-    this.init(config);
+    setTimeout(() => {
+      this.init(config);
+    }, 32);
   }
 }
