@@ -1,12 +1,12 @@
 interface CanvasSpriteConfig {
     canvas: HTMLCanvasElement;
-    fps: number;
+    fps?: number;
     frames: number;
     imageUrl: string;
-    loop: number | boolean;
-    autoPlay: boolean;
+    loop?: number | boolean;
+    autoPlay?: boolean;
 }
-export default class CanvasSprite {
+declare class CanvasSprite {
     private canvas;
     private context;
     private frames;
@@ -32,4 +32,4 @@ export default class CanvasSprite {
     destroy(): void;
     reset(config: CanvasSpriteConfig): void;
 }
-export {};
+export default CanvasSprite;

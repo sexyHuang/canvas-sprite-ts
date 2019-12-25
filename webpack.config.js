@@ -2,7 +2,7 @@
  * @Author: Sexy
  * @Date: 2019-09-26 14:14:25
  * @LastEditors  : Sexy
- * @LastEditTime : 2019-12-20 15:06:24
+ * @LastEditTime : 2019-12-25 18:43:15
  * @Description: file content
  */
 const path = require('path');
@@ -11,7 +11,9 @@ module.exports = {
   mode: 'production',
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'umd', // 采用通用模块定义
+    libraryExport: 'default' // 兼容 ES6(ES2015) 的模块系统、CommonJS 和 AMD 模块规范
   },
 
   // Enable sourcemaps for debugging webpack's output.

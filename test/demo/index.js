@@ -2,10 +2,10 @@
  * @Author: Sexy
  * @Date: 2019-12-25 11:02:08
  * @LastEditors  : Sexy
- * @LastEditTime : 2019-12-25 15:55:54
+ * @LastEditTime : 2019-12-25 18:36:20
  * @Description: file content
  */
-import CanvasSprite from '@/index';
+import CanvasSprite from './../../dist/index';
 import spriteImg from './card-sprite-A.png';
 import spriteImgC from './card-sprite-C.png';
 

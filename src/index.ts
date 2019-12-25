@@ -2,7 +2,7 @@
  * @Author: Sexy
  * @Date: 2019-12-18 11:42:55
  * @LastEditors  : Sexy
- * @LastEditTime : 2019-12-25 17:34:16
+ * @LastEditTime : 2019-12-25 18:39:19
  * @Description: file content
  */
 
@@ -35,7 +35,7 @@ const loadImage = (url: string) =>
     img.src = src;
   });
 
-export default class CanvasSprite {
+class CanvasSprite {
   private canvas!: HTMLCanvasElement;
   private context!: CanvasRenderingContext2D;
   private frames!: number;
@@ -74,7 +74,7 @@ export default class CanvasSprite {
     const imgPromise = loadImage(imageUrl);
     this.spriteImgPromise = imgPromise;
     autoPlay && this.play();
-    imgPromise.then(spriteImg => {
+    imgPromise.then((spriteImg: { width: number; height: any }) => {
       const cWidth = spriteImg.width / frames;
       const cHeight = spriteImg.height;
       canvas.width = cWidth;
@@ -157,3 +157,5 @@ export default class CanvasSprite {
     }, 32);
   }
 }
+
+export default CanvasSprite;
