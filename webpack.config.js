@@ -2,7 +2,7 @@
  * @Author: Sexy
  * @Date: 2019-09-26 14:14:25
  * @LastEditors  : Sexy
- * @LastEditTime : 2019-12-18 11:48:28
+ * @LastEditTime : 2019-12-20 15:06:24
  * @Description: file content
  */
 const path = require('path');
@@ -10,7 +10,7 @@ module.exports = {
   entry: './src/index.ts',
   mode: 'production',
   output: {
-    filename: 'bundle.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, 'dist')
   },
 
