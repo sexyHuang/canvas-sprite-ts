@@ -2,7 +2,7 @@
  * @Author: Sexy
  * @Date: 2019-09-26 14:14:25
  * @LastEditors  : Sexy
- * @LastEditTime : 2019-12-25 18:43:15
+ * @LastEditTime : 2020-01-17 15:15:25
  * @Description: file content
  */
 const path = require('path');
@@ -16,8 +16,8 @@ module.exports = {
     libraryExport: 'default' // 兼容 ES6(ES2015) 的模块系统、CommonJS 和 AMD 模块规范
   },
 
-  // Enable sourcemaps for debugging webpack's output.
-  devtool: 'source-map',
+  /*  // Enable sourcemaps for debugging webpack's output.
+  devtool: 'source-map', */
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
